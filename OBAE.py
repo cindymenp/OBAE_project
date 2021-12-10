@@ -1,14 +1,9 @@
-import psycopg2
 import psycopg2 as pg
-import pandas as pd
-import pandas.io.sql as psql
-from IPython import display
-import matplotlib.image as mpimg
-from matplotlib import rcParams
 import folium
 from folium import Choropleth, Circle, Marker
 from folium.plugins import MarkerCluster
-import csv
+import pandas as pd
+import pandas.io.sql as psql
 
 con = psycopg2.connect(database="OBAE", user="cindy", password="Flamingosis01.", host="localhost", port="5432")
 
