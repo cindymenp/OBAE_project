@@ -63,13 +63,28 @@ Use for all libraries the package manager pip to install .
 
 ### psycopg2
 
+Terminal:
+
 Python 2: pip install psycopg2
 //Python 3 : pip3 install psycopg2
 
+Jupyter Lab:
+
+Python 2: %pip install psycopg2
+//Python 3 : %pip3 install psycopg2
+
 ### folium
+
+Terminal:
 
 Python 2: pip install folium 
 //Python 3: pip3 install folium
+
+Jupyter Lab:
+
+Python 2: %pip install folium 
+//Python 3: %pip3 install folium
+
 
 # Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
