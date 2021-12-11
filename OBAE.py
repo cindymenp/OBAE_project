@@ -197,20 +197,113 @@ WHERE genres_books.title = 'Something needs to change'
 """
 ,con))
 
-#check for availability of books in OBA Olympic Quarter
+#reservation system for books in OBA Olympic Quarter
 
-books = []
-books.append(["Something needs to change"])
+def print_reservation():
+    """Print the tickets of the user."""
+    for user_name, books in user_reservation.items():
+        print(f"\nYou, {user_name.title()}, have chosen {len(books)} book(s).")
+        for book in books:
+            print(f"\tbook name: {book}")
 
 
-def checkBook():
-    book = str(input("Enter name of the book"))
+# Empty dictionary to store info later on.
+user_reservation = {}
 
-    if book == 'Something needs to change':
-        print("This book is available.")
-    else:
-        print("This book is not available")
+# List of books the user can choose from.
+available_books = ['Something needs to change']
 
+
+# All prompts.
+start_prompt = "\nWould you like to make a new reservation? (yes/no) "
+wanted_books_prompt = "\nHow many book(s) would you like to reservate today?"
+wanted_books_prompt += "\nEnter the number: "
+number_prompt = "What is your OBA membership number? "
+book_prompt = "\nPlease enter the book's title: "
+go_again_prompt = "Would you like to make other reservation (yes/no) "
+
+
+
+print("Welcome To The OBA Seat Booking Portal!")
+
+# Ask the user if he would like to start the books reservations.
+start = input(start_prompt)
+if start.lower() == 'yes':
+    # Runs until it reaches a break statement.
+    while True:
+        # Empty list to store the book(s) the user has chosen.
+        books = []
+
+        # Find out how many times to run the while loop.
+        wanted_books = input(wanted_books_prompt)
+        # Convert the string representation of the number to an integer representation.
+        wanted_books = int(wanted_books)
+        # If the user has asked for more books than the number of books
+        # available execute this block.
+        if wanted_books_prompt > str(available_books):
+            print(f"\n--I'm sorry, we only have {len(available_books)} "
+                "book(s) available--")
+            print("--Please try again--")
+            continue
+
+        # Ask for the OBA member number.
+        user_number = input(number_prompt)
+
+        # Run until the user has chosen the requested number of books.
+        while True:
+
+            # Show the user the available books.
+            print("\nHere are the available book(s):")
+            for seat in available_books:
+                print(seat)
+
+            # Ask the user for their chosen seat number.
+            seat = input(book_prompt)
+
+            # If the user has entered a seat that is in the 'available_books'
+            # list; remove it from the 'available_books' list.
+            if seat in available_books:
+                available_books.remove(seat)
+            # The user has entered a seat that is not in the 'available_books' list.
+            # Ask for their book reservation again.
+            else:
+                print("\n--I'm sorry you have chosen an invalid book(s)--"
+                    "\n-Please try again-")
+                continue
+
+            # Add the chosen seat to the 'books' list
+            books.append(books)
+
+            # If the user has said that they are going to book more than one book
+            # go through this book booking 'while' loop again.
+            if wanted_books_prompt == books:
+                print("\nYou can now choose another seat.")
+                # The loop will run a limited number of times.
+                # It will only 'continue' when there is more than one 'wanted_book'.
+                wanted_books_prompt-=1
+                continue
+            else:
+                break
+
+        # Add the 'user_number' variable and 'books' list to the 'user_reservations' dictionary.
+        user_reservation[user_number] = books
+
+
+        #If their are any available books left ask the user if he
+        # wants to let another person book their reservation.
+        if available_books:
+            go_again = input(go_again_prompt)
+            if go_again == 'no':
+                break
+        else:
+            break
+
+    print_reservation()
+    print("\nYour reservation is complete!"
+        "\nYou can see all the details on 'My reservations' page")
+
+else:
+    print("Try again later")
 
 #find item in stores
 find_book_category = pd.read_csv('/Users/cindymendoncapaez/opt/anaconda3/lib/python3.8/site-packages/folium/OBA/joined_books_genres_lat_lng.csv')
@@ -252,26 +345,111 @@ ON oba_locations.id = join_library_floors.floors_id
 """
 ,con))
 
-seat = []
-seat.append(["AE-1"])
-seat.append(["AE-2"])
-seat.append(["AE-3"])
-seat.append(["BT-5"])
-seat.append(["BT-6"])
-seat.append(["BT-1"])
-seat.append(["PP-0"])
-seat.append(["PP-5"])
+#Reservation system (seats)
+
+def print_reservation():
+    """Print the tickets of the user."""
+    for user_name, seats in user_reservation.items():
+        print(f"\nYou, {user_name.title()}, have chosen {len(seats)} seat(s).")
+        for seat in seats:
+            print(f"\tSeat number: {seat}")
 
 
+# Empty dictionary to store info later on.
+user_reservation = {}
 
-def checkSeat():
-    row = str(input("Enter seat name (two letters AE,BT or PP + one number from 0 to 5)"))
+# List of seats the user can choose from.
+available_seats = ['AE-1', 'AE-2', 'AE-3', 'BT-5', 'BT-6', 'BT-1', 'PP-0', 'PP-5']
 
-    if row == 'PP-0'or 'BT-5' or 'PP-0':
-        print("This seat is already booked.")
-    else:
-        print("This seat is empty.")
 
+# All prompts.
+start_prompt = "\nWould you like to start booking your seat? (yes/no) "
+wanted_seats_prompt = "\nHow many seats are you booking today?"
+wanted_seats_prompt += "\nEnter the number: "
+number_prompt = "What is your OBA membership number? "
+seat_prompt = "\nPlease enter the seat you would like to book: "
+go_again_prompt = "Would you like to let someone else book their tickets? (yes/no) "
+
+
+print("Welcome To The OBA Seat Booking Portal!")
+
+# Ask the user if he would like to start booking their tickets.
+start = input(start_prompt)
+if start.lower() == 'yes':
+    # Runs until it reaches a break statement.
+    while True:
+        # Empty list to store the seat(s) the user has chosen.
+        seats = []
+
+        # Find out how many times to run the while loop.
+        wanted_seats = input(wanted_seats_prompt)
+        # Convert the string representation of the number to an integer representation.
+        wanted_seats = int(wanted_seats)
+        # If the user has asked for more seats than the number of seats
+        # available execute this block.
+        if wanted_seats > len(available_seats):
+            print(f"\n--I'm sorry, we only have {len(available_seats)} "
+                "seats available--")
+            print("--Please try again--")
+            continue
+
+        # Ask for the OBA member number.
+        user_number = input(number_prompt)
+
+        # Run until the user has chosen the requested number of seats.
+        while True:
+
+            # Show the user the available seats.
+            print("\nHere are the available seats:")
+            for seat in available_seats:
+                print(seat)
+
+            # Ask the user for their chosen seat number.
+            seat = input(seat_prompt)
+
+            # If the user has entered a seat that is in the 'available_seats'
+            # list; remove it from the 'available_seats' list.
+            if seat in available_seats:
+                available_seats.remove(seat)
+            # The user has entered a seat that is not in the 'avialbe_seats' list.
+            # Ask for their seat again.
+            else:
+                print("\n--I'm sorry you have chosen an invalid seat--"
+                    "\n-Please try again-")
+                continue
+
+            # Add the chosen seat to the 'seats' list
+            seats.append(seat)
+
+            # If the user has said that they are going to book more than one seat
+            # go through this seat booking 'while' loop again.
+            if wanted_seats > 1:
+                print("\nYou can now choose another seat.")
+                # The loop will run a limited number of times.
+                # It will only 'continue' when there is more than one 'wanted_seat'.
+                wanted_seats-=1
+                continue
+            else:
+                break
+
+        # Add the 'user_number' variable and 'seats' list to the 'user_reservations' dictionary.
+        user_reservation[user_number] = seats
+
+        #If their are any available seats left ask the user if he
+        # wants to let another person book their tickets.
+        if available_seats:
+            go_again = input(go_again_prompt)
+            if go_again == 'no':
+                break
+        else:
+            break
+
+    print_reservation()
+    print("\nYour reservation is complete!"
+        "\nYou can see all the details on 'My reservations' page")
+
+else:
+    print("Try again later")
 
 
 # code starts here
