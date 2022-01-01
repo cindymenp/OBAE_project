@@ -6,13 +6,14 @@ The OBAE project is a database done with Postgresql, Python and Jupyter Lab that
 psycopg2 has as a main purpose to be a PostgreSQL database adapter for Python.
 
 ### Usage ###
+```` 
 con = psycopg2.connect(database="store_database", user="cindy", password="Flamingosis01.", host="localhost", port="5432") cur = con.cursor()
-
+```` 
 ## folium
 folium is a Python library that has as a main purpose to show maps in Python/Jupyter Lab
 
 ### Usage ###
-
+```` 
 m_1 = folium.Map(location=[52.379189, 4.899431], tiles='openstreetmap', zoom_start=12)
 
 for index,row in Sunday_opening_libraries.iterrows():
@@ -54,7 +55,7 @@ for index,row in find_book_category.iterrows():
     name = row["name"]
     map_displayed_info = '{} : {}'.format(name, title)
     folium.Marker([lat,lon],popup=map_displayed_info).add_to(m_4)
-
+```` 
 
 # Installation of all libraries
 Use for all libraries the package manager pip to install .
